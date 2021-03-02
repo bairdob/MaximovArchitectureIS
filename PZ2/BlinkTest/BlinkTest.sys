@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="BlinkTest" Comment="">
+	<Identification>
+	</Identification>
+	<VersionInfo Version="1.0" Author="Win10 Pro" Date="2021-03-02">
+	</VersionInfo>
+	<Application Name="BlinkTestApp" Comment="">
+		<SubAppNetwork>
+			<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="666.6666666666667" y="800.0">
+				<Parameter Name="DT" Value="T#1s"/>
+			</FB>
+			<FB Name="E_SWITCH" Type="E_SWITCH" Comment="" x="1733.3333333333335" y="800.0">
+			</FB>
+			<FB Name="E_SR" Type="E_SR" Comment="" x="2800.0" y="800.0">
+			</FB>
+			<EventConnections>
+				<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
+				<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
+				<Connection Source="E_CYCLE.EO" Destination="E_SWITCH.EI" Comment=""/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="80.0" dx2="80.0" dy="286.6666666666667"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="Testee" Type="FORTE_PC" Comment="" x="613.3333333333334" y="1113.3333333333335">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
+		<Resource Name="Blinky_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="1200.0" y="933.3333333333334">
+					<Parameter Name="DT" Value="T#1s"/>
+				</FB>
+				<FB Name="E_SWITCH" Type="E_SWITCH" Comment="" x="2133.3333333333335" y="933.3333333333334">
+				</FB>
+				<FB Name="E_SR" Type="E_SR" Comment="" x="3600.0" y="933.3333333333334">
+				</FB>
+				<EventConnections>
+					<Connection Source="START.COLD" Destination="E_CYCLE.START" Comment="" dx1="200.0"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE.START" Comment="" dx1="266.6666666666667"/>
+					<Connection Source="E_CYCLE.EO" Destination="E_SWITCH.EI" Comment=""/>
+					<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
+					<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="80.0" dx2="80.0" dy="233.33333333333334"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="BlinkTestApp.E_CYCLE" To="Testee.Blinky_RES.E_CYCLE"/>
+	<Mapping From="BlinkTestApp.E_SWITCH" To="Testee.Blinky_RES.E_SWITCH"/>
+	<Mapping From="BlinkTestApp.E_SR" To="Testee.Blinky_RES.E_SR"/>
+	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="1866.6666666666667" y="666.6666666666667" dx1="2000.0">
+		<Attribute Name="Color" Type="STRING" Value="146,163,231" Comment="color"/>
+	</Segment>
+	<Link SegmentName="Ethernet" CommResource="Testee" Comment="">
+	</Link>
+</System>
