@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="Pila" Comment="">
+	<VersionInfo Version="1.0" Author="Win10 Pro" Date="2021-03-02">
+	</VersionInfo>
+	<Application Name="PilaApp" Comment="">
+		<SubAppNetwork>
+			<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="533.3333333333334" y="1333.3333333333335">
+				<Parameter Name="DT" Value="T#1s"/>
+			</FB>
+			<FB Name="E_CTU" Type="E_CTU" Comment="" x="1733.3333333333335" y="1333.3333333333335">
+			</FB>
+			<FB Name="FB_CTU_2" Type="FB_CTU" Comment="" x="2933.3333333333335" y="1333.3333333333335">
+				<Parameter Name="PV" Value="INT#0"/>
+			</FB>
+			<FB Name="F_EQ_1" Type="F_EQ" Comment="" x="2933.3333333333335" y="2400.0">
+				<Parameter Name="IN2" Value="INT#9"/>
+			</FB>
+			<FB Name="E_T_FF" Type="E_T_FF" Comment="" x="4133.333333333334" y="1333.3333333333335">
+			</FB>
+			<FB Name="F_MOD" Type="F_MOD" Comment="" x="2933.3333333333335" y="533.3333333333334">
+				<Parameter Name="IN2" Value="INT#10"/>
+			</FB>
+			<EventConnections>
+				<Connection Source="E_CYCLE.EO" Destination="E_CTU.CU" Comment=""/>
+				<Connection Source="E_CTU.CUO" Destination="FB_CTU_2.REQ" Comment=""/>
+				<Connection Source="FB_CTU_2.CNF" Destination="F_EQ_1.REQ" Comment="" dx1="300.0" dx2="393.33333333333337" dy="686.6666666666667"/>
+				<Connection Source="FB_CTU_2.CNF" Destination="E_T_FF.CLK" Comment=""/>
+				<Connection Source="E_CTU.CUO" Destination="F_MOD.REQ" Comment="" dx1="140.0"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="E_CTU.Q" Destination="FB_CTU_2.CU" Comment="" dx1="340.0"/>
+				<Connection Source="FB_CTU_2.CV" Destination="F_EQ_1.IN1" Comment="" dx1="80.0" dx2="80.0" dy="386.6666666666667"/>
+				<Connection Source="F_EQ_1.OUT" Destination="FB_CTU_2.R" Comment="" dx1="80.0" dx2="286.6666666666667" dy="-480.0"/>
+				<Connection Source="E_CTU.CV" Destination="F_MOD.IN1" Comment="" dx1="440.0"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="1333.3333333333335" y="933.3333333333334">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
+		<Resource Name="Pila_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="1866.6666666666667" y="1333.3333333333335">
+					<Parameter Name="DT" Value="T#1s"/>
+				</FB>
+				<FB Name="E_CTU" Type="E_CTU" Comment="" x="3866.666666666667" y="2400.0">
+				</FB>
+				<FB Name="FB_CTU_2" Type="FB_CTU" Comment="" x="4933.333333333334" y="2400.0">
+					<Parameter Name="PV" Value="INT#0"/>
+				</FB>
+				<FB Name="F_EQ_1" Type="F_EQ" Comment="" x="6000.0" y="2400.0">
+					<Parameter Name="IN2" Value="INT#9"/>
+				</FB>
+				<FB Name="E_T_FF" Type="E_T_FF" Comment="" x="4000.0" y="1333.3333333333335">
+				</FB>
+				<FB Name="F_MOD" Type="F_MOD" Comment="" x="4266.666666666667" y="400.0">
+					<Parameter Name="IN2" Value="INT#10"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="START.COLD" Destination="E_CYCLE.START" Comment="" dx1="593.3333333333334"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE.START" Comment="" dx1="593.3333333333334"/>
+					<Connection Source="E_CYCLE.EO" Destination="E_CTU.CU" Comment="" dx1="760.0"/>
+					<Connection Source="E_CTU.CUO" Destination="FB_CTU_2.REQ" Comment=""/>
+					<Connection Source="FB_CTU_2.CNF" Destination="F_EQ_1.REQ" Comment=""/>
+					<Connection Source="FB_CTU_2.CNF" Destination="E_T_FF.CLK" Comment="" dx1="80.0" dx2="80.0" dy="-533.3333333333334"/>
+					<Connection Source="E_CTU.CUO" Destination="F_MOD.REQ" Comment="" dx1="80.0" dx2="80.0" dy="-1000.0"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="E_CTU.Q" Destination="FB_CTU_2.CU" Comment="" dx1="340.0"/>
+					<Connection Source="FB_CTU_2.CV" Destination="F_EQ_1.IN1" Comment="" dx1="313.33333333333337"/>
+					<Connection Source="F_EQ_1.OUT" Destination="FB_CTU_2.R" Comment="" dx1="80.0" dx2="80.0" dy="46.66666666666667"/>
+					<Connection Source="E_CTU.CV" Destination="F_MOD.IN1" Comment="" dx1="80.0" dx2="80.0" dy="-1100.0"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="PilaApp.E_CYCLE" To="FORTE_PC.Pila_RES.E_CYCLE"/>
+	<Mapping From="PilaApp.E_CTU" To="FORTE_PC.Pila_RES.E_CTU"/>
+	<Mapping From="PilaApp.FB_CTU_2" To="FORTE_PC.Pila_RES.FB_CTU_2"/>
+	<Mapping From="PilaApp.F_EQ_1" To="FORTE_PC.Pila_RES.F_EQ_1"/>
+	<Mapping From="PilaApp.E_T_FF" To="FORTE_PC.Pila_RES.E_T_FF"/>
+	<Mapping From="PilaApp.F_MOD" To="FORTE_PC.Pila_RES.F_MOD"/>
+	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="2933.3333333333335" y="533.3333333333334" dx1="2000.0">
+		<Attribute Name="Color" Type="STRING" Value="210,52,181" Comment="color"/>
+	</Segment>
+	<Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+	</Link>
+</System>
