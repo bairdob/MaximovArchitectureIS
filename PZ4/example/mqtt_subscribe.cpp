@@ -7,7 +7,7 @@
 
 #define mqtt_host "localhost"
 #define mqtt_port 1883 
-#define mqtt_topic "pooh" 
+#define mqtt_topic "state" 
 
 void on_connect(struct mosquitto *mosq, void *obj, int reason_code)
 {

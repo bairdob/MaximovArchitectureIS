@@ -167,14 +167,26 @@ int main(int argc, char *argv[])
     }
 
     PoohStateContext *pooh = new PoohStateContext(new PoohEmptyState());
-    
-    do{
-        publish_pooh_data(mosq,pooh);
-        pooh->fly();
-        publish_pooh_data(mosq,pooh);
-        pooh->freeze();
-        publish_pooh_data(mosq,pooh);
-        pooh->fly();
+
+    enum CMD {fly_up = 1, eat, fly_down};
+    int read;
+
+    do{ std::cin >> read;
+        switch (read){
+        case fly_up:
+            publish_pooh_data(mosq,pooh);
+            break;
+        case eat:
+            pooh->fly();
+            publish_pooh_data(mosq,pooh);
+            break;
+        case fly_down:
+            pooh->freeze();
+            publish_pooh_data(mosq,pooh);
+            break;
+        default:
+            break;
+    }
     } while(get_state(pooh) != "Pooh Full");
 
     mosquitto_lib_cleanup();
