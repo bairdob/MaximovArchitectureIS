@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 
     enum CMD {fly_up = 1, eat, fly_down};
     int read;
-
+    std::cout << "Commands:"<< " 1-fly_up" << " 2-eat" <<  " 3-fly_down" << std::endl;
     do{ std::cin >> read;
         switch (read){
         case fly_up:
