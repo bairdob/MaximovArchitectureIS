@@ -130,6 +130,10 @@ https://martalex.gitbooks.io/gameprogrammingpatterns/content/chapter-2/2.6-state
 
 - высота, скорость, ускорение, масса, состояние
 
+Получение команд через UDP
+
+Поместить приложение (пуха) в docker. Dockerfile поместить в репозиторий на GitHub
+
 [:arrow_up:Оглавление](#Оглавление)
 ____
 
