@@ -33,8 +33,8 @@ std::string getCMD(){
         //return rc;
     }
     printf("%s/%s\n", msg->topic, (char *)msg->payload);
-    
-    mosquitto_message_free(&msg);
+
+    //mosquitto_message_free(&msg); //fix memory for mqtt ubuntu docker
     mosquitto_lib_cleanup();
 
     return (char *)msg->payload;;
@@ -45,10 +45,8 @@ int main(){
 const float dt = 0.1; // s
     FlyingBear Pooh(1, 10); //(mass, duploHeight)
     std::string CMD;
-    std::cout << "hello" <<std::endl;
     do {
         CMD = getCMD();
-        std::cout << CMD <<std::endl;
         if (CMD == "Pooh Empty"){
             Pooh.fly_up(dt);
         }
