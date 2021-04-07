@@ -45,6 +45,7 @@ int main(){
 const float dt = 0.1; // s
     FlyingBear Pooh(1, 10); //(mass, duploHeight)
     std::string CMD;
+    std::cout << "hello" <<std::endl;
     do {
         CMD = getCMD();
         std::cout << CMD <<std::endl;
