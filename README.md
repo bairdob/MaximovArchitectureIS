@@ -135,8 +135,11 @@ https://martalex.gitbooks.io/gameprogrammingpatterns/content/chapter-2/2.6-state
 Поместить приложение (пуха) в docker. Dockerfile поместить в репозиторий на GitHub
 
 Команды для Docker:
+
 docker build -t test .	собрать контейнер
+
 docker run -it test	запустить контейнер
+
 docker system prune -a	очистить память 
 
 [:arrow_up:Оглавление](#Оглавление)
