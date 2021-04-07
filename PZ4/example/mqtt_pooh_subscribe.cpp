@@ -47,6 +47,7 @@ const float dt = 0.1; // s
     std::string CMD;
     do {
         CMD = getCMD();
+        std::cout << CMD <<std::endl;
         if (CMD == "Pooh Empty"){
             Pooh.fly_up(dt);
         }
