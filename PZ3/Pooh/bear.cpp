@@ -4,8 +4,8 @@
 #include <iostream>
 #include <iomanip>
 #include "bear.h"
-#include "pid.cpp"
-#include "engine.cpp"
+#include "pid.h"
+#include "engine.h"
 
 
 Bear::Bear(){};
@@ -34,12 +34,12 @@ float Bear::getHollowHeight(){return hollowHeight;};
 float Bear::getSpeed(){return velocity;};
 
 void Bear::eat(float dt){
-	cout << "eating" << std::endl;
+	std::cout << "eating" << std::endl;
 	mass += 0.1;
 };
 
 void Bear::show(){
-	std::cout << std::setprecision(3) << fixed << "\t h = "<< height << " a = "<< acceleration << " v = "<< velocity<<" m = " << mass;
+	std::cout << std::setprecision(3) << std::fixed << "\t h = "<< height << " a = "<< acceleration << " v = "<< velocity<<" m = " << mass;
 }
 
 // void Bear::fly_up(float dt){

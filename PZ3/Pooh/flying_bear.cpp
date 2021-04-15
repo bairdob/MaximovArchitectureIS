@@ -4,9 +4,9 @@
 
 #include <iostream>
 #include "flying_bear.h"
-#include "bear.cpp"
-#include "pid.cpp"
-#include "engine.cpp"
+#include "bear.h"
+#include "pid.h"
+#include "engine.h"
 
 FlyingBear::FlyingBear() : Bear(){};
 
@@ -22,7 +22,7 @@ void FlyingBear::show(){
 void FlyingBear::fly_up(float dt){
 	double dh = 0;
 	PIDImpl pid (dt, 100, 0, 0.03, 0.01, 0);
-	cout << "fly up" << std::endl;
+	std::cout << "fly up" << std::endl;
 	
 	while (abs(hollowHeight - height) > 0.1){
 		fan.setPower(pid.calculate(hollowHeight, height)); 
@@ -45,7 +45,7 @@ void FlyingBear::fly_up(float dt){
 void FlyingBear::fly_down_extra(float dt){
 	double dh = 0;
 	PIDImpl pid (dt, 100, 0, 0.03, 0.01, 0);
-	cout << "fly down extra" << std::endl;
+	std::cout << "fly down extra" << std::endl;
 	while (height > 0){
 		height = height+ dh;
     	dh = velocity * dt;

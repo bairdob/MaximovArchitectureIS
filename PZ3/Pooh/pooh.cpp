@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip> // setw()
-#include "pid.cpp"
-#include "engine.cpp"
-#include "bear.cpp"
-#include "flying_bear.cpp"
+#include "pid.h"
+#include "engine.h"
+#include "bear.h"
+#include "flying_bear.h"
 
 
 int main() {
