@@ -32,7 +32,7 @@ void FlyingBear::fly_up(float dt){
             acceleration = (fan.getPower()+ 9.8*mass)/mass; 
             velocity = velocity+ acceleration * dt;
         }	
-        else {
+        else {	globalHeight = height;
        			height = height+ dh;
             	dh = -velocity * dt;
             	velocity =  acceleration * dt;
@@ -48,6 +48,7 @@ void FlyingBear::fly_down_extra(float dt){
 	PIDImpl pid (dt, 100, 0, 0.03, 0.01, 0);
 	cout << "fly down extra" << std::endl;
 	while (height > 0){
+		//globalHeight = height;
 		height = height+ dh;
     	dh = velocity * dt;
     	velocity =  velocity + acceleration * dt;
@@ -66,7 +67,7 @@ void FlyingBear::eat(float dt){
 	    }
 		if (abs(hollowHeight - height) > 0.1 && mass < 1.3 ) fan.setPower(pid.calculate(hollowHeight, height)); 
 		if (fan.getPower() !=0){
-				    
+				    globalHeight = height;
 	       height = height + dh; 
 	        dh = velocity * dt;
             acceleration = (fan.getPower()+ 9.8*mass)/mass; 

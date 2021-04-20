@@ -32,18 +32,15 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        {Pooh.fly_up(dt);
-        pooh.move(0, -globalHeight*0.00000000000001);
-         }
-        if (abs(Pooh.getHollowHeight() - Pooh.getHeight()) < 0.1) Pooh.eat(dt);
-        if (abs(Pooh.getMass() - Pooh.getMaxMass()) < 0.01) Pooh.fly_down_extra(dt);
-        std::cout << globalHeight << std::endl;
-
+        Pooh.fly_up(dt);
         pooh.move(0, -globalHeight*0.01);
+        //if (abs(Pooh.getHollowHeight() - Pooh.getHeight()) < 0.1) Pooh.eat(dt);
+        //if (abs(Pooh.getMass() - Pooh.getMaxMass()) < 0.01) Pooh.fly_down_extra(dt);
+        std::cout << globalHeight << std::endl;
+        
+    
 
         window.draw(pooh);
-        
-
         window.clear();
         window.draw(pooh);
         window.display();
