@@ -1,6 +1,6 @@
 #ifndef _bear_h
 #define _bear_h
-
+#include <SFML/Graphics.hpp>
 float globalHeight;
 class Bear{
 protected:
@@ -12,7 +12,8 @@ protected:
 	float height;
 	float time;
 public:
-    Bear();
+	sf::Sprite sprite;
+ 	Bear();
 	Bear(float nm, float nH);
 	~Bear();
 	virtual void eat(float dt);

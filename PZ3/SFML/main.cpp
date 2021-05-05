@@ -12,18 +12,17 @@ using namespace sf;
 int main()
 {
     sf::Vector2f windowSize(800, 600);
-    sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "SFML works!");
-
-    Texture texture;
-    texture.loadFromFile("img/pooh.png");
-    Sprite pooh;
-    pooh.setTexture(texture);
-    pooh.setScale(0.2, 0.2);
-    pooh.setPosition(100,400);
+    sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "Pooh flight model");
 
     const float dt = 0.1; // s
-    FlyingBear Pooh(1, 10); //(mass, duploHeight)
-      
+    FlyingBear Pooh(1, 10); //(mass, Height)
+    sf::Texture texture;
+    texture.loadFromFile("img/pooh.png");
+    Pooh.sprite.setTexture(texture);
+    Pooh.sprite.setScale(0.2, 0.2);
+    Pooh.sprite.setPosition(100,450);
+    sf::Vector2f position = Pooh.sprite.getPosition();
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -33,19 +32,26 @@ int main()
                 window.close();
         }
         Pooh.fly_up(dt);
-        pooh.move(0, -globalHeight*0.01);
-        //if (abs(Pooh.getHollowHeight() - Pooh.getHeight()) < 0.1) Pooh.eat(dt);
-        //if (abs(Pooh.getMass() - Pooh.getMaxMass()) < 0.01) Pooh.fly_down_extra(dt);
-        std::cout << globalHeight << std::endl;
-        
-    
-
-        window.draw(pooh);
-        window.clear();
-        window.draw(pooh);
-        window.display();
+		while (Pooh.sprite.getPosition().y > Pooh.getHollowHeight()*10){
+			//std::cout << "h = " << abs(Pooh.sprite.getPosition().y - 450)/34<< "\n";
+	        Pooh.sprite.move(0, -10); //toDo change to y = velocity 
+	        window.setFramerateLimit(10);
+        	window.clear();
+        	window.draw(Pooh.sprite);
+        	window.display();
+	    }
+        if (abs(Pooh.getHollowHeight() - Pooh.getHeight()) < 0.1) Pooh.eat(dt);
+        if (abs(Pooh.getMass() - Pooh.getMaxMass()) < 0.01) {
+            Pooh.fly_down_extra(dt);
+    	    while (abs(Pooh.getMass() - Pooh.getMaxMass()) < 0.01){
+    			//std::cout << "h = " << Pooh.sprite.getPosition().y << "\n";
+    	        Pooh.sprite.move(0, 10);
+    	        window.setFramerateLimit(10);
+            	window.clear();
+            	window.draw(Pooh.sprite);
+            	window.display();
+    	    }
         }
-    
-
+    }
     return 0;
 }
